@@ -1,11 +1,4 @@
-// export { default as ChatMainScreen } from './chat/ChatMainScreen';
-// export { default as UpdateMainScreen } from './update/UpdateMainScreen';
-// export { default as CallMainScreen } from './call/CallMainScreen';
-// export { default as SettingMainScreen } from './setting/SettingMainScreen';
-// export { default as ChatStack } from './chat/ChatStack';
-// export { default as CallStack } from './call/CallStack';
-// export { default as SettingStack } from './setting/SettingStack';
-// export { default as UpdateStack } from './update/UpdateStack';
+
 
 import ChatMainScreen from "./chat/ChatMainScreen";
 import UpdateMainScreen from "./update/UpdateMainScreen";

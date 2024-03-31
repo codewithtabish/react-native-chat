@@ -2,7 +2,8 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import ScreenIndex from "../screen";
 import navigationString from "./navigationString";
 import { Ionicons } from "@expo/vector-icons";
-import { Dimensions, View } from "react-native";
+import { Dimensions, useColorScheme, View } from "react-native";
+import Colors from "../style/Colors";
 const Tab = createMaterialTopTabNavigator();
 
 const {width,height}=Dimensions.get('window')
@@ -10,7 +11,11 @@ const {width,height}=Dimensions.get('window')
 
 
 
+
+
 function BottomTabs() {
+      const isDark = useColorScheme() == "dark";
+      console.log(isDark)
   return (
     <Tab.Navigator
       tabBarPosition="bottom"
@@ -23,7 +28,9 @@ function BottomTabs() {
           //   backgroundColor:"red",
           display: "none",
         },
-        tabBarActiveTintColor: "black",
+        tabBarActiveTintColor: isDark
+          ? Colors.dark.darkText
+          : Colors.light.lightText,
         tabBarInactiveTintColor: "gray",
         indicatorStyle: { height: 0, display: "none" },
         style: { backgroundColor: "white" },
@@ -31,6 +38,17 @@ function BottomTabs() {
           width: width / 4,
           justifyContent: "center",
           alignItems: "center",
+        },
+        tabBarStyle: {
+          // backgroundColor:s"red",
+          // backgroundColor:isDark?Colors.dark.backgroundColor:Colors.light.backgroundColor,
+          backgroundColor: isDark ? "black" : "white",
+          // Colors.dark.backgroundColor:Colors.light.backgroundColor,
+          // shadowOpacity:0,
+          // shadowColor:"none",
+          // minHeight:80,
+          // marginHorizontal:20
+          // padding:20
         },
         // tabBarBadge:
       }}
@@ -45,7 +63,8 @@ function BottomTabs() {
                 style={{
                   position: "absolute",
                   right: 0,
-                  backgroundColor: "rgba(0,0,0,.2)",
+                  backgroundColor: !isDark ? "rgba(0,0,0,.4)" : "#ccc",
+                  // backgroundColor:isDark?Colors.dark.darkSecondary:Colors.light.lightSecondary,
                   width: 33,
                   height: 33,
                   borderRadius: 14,
@@ -55,38 +74,17 @@ function BottomTabs() {
                   bottom: -5,
                 }}
               >
-                <Ionicons name="chatbox" size={20} color={"#030303"} />
+                <Ionicons
+                  name="chatbox-outline"
+                  size={20}
+                  color={
+                    "white"
+                    // isDark?Colors.dark.darkText:Colors.light.lightText
+                  }
+                />
               </View>
             ) : (
               <Ionicons name="chatbox-outline" size={24} color={"gray"} />
-            );
-          },
-        }}
-      />
-      <Tab.Screen
-        name={navigationString.settingTab}
-        component={ScreenIndex.SettingStack}
-        options={{
-          tabBarIcon: ({ color, focused }) => {
-            return focused ? (
-              <View
-                style={{
-                  position: "absolute",
-                  right: 0,
-                  backgroundColor: "rgba(0,0,0,.2)",
-                  width: 33,
-                  height: 33,
-                  borderRadius: 14,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  padding: 5,
-                  bottom: -5,
-                }}
-              >
-                <Ionicons name="settings-outline" size={20} color={"#030303"} />
-              </View>
-            ) : (
-              <Ionicons name="settings" size={24} color={"gray"} />
             );
           },
         }}
@@ -101,7 +99,8 @@ function BottomTabs() {
                 style={{
                   position: "absolute",
                   right: 0,
-                  backgroundColor: "rgba(0,0,0,.2)",
+                  backgroundColor: !isDark ? "rgba(0,0,0,.4)" : "#ccc",
+                  // backgroundColor:isDark?Colors.dark.darkSecondary:Colors.light.lightSecondary,
                   width: 33,
                   height: 33,
                   borderRadius: 14,
@@ -111,7 +110,14 @@ function BottomTabs() {
                   bottom: -5,
                 }}
               >
-                <Ionicons name="notifications" size={20} color={"#030303"} />
+                <Ionicons
+                  name="notifications-outline"
+                  size={20}
+                  color={
+                    "white"
+                    // isDark?Colors.dark.darkText:Colors.light.lightText
+                  }
+                />
               </View>
             ) : (
               <Ionicons name="notifications-outline" size={24} color={"gray"} />
@@ -129,7 +135,8 @@ function BottomTabs() {
                 style={{
                   position: "absolute",
                   right: 0,
-                  backgroundColor: "rgba(0,0,0,.2)",
+                  backgroundColor: !isDark ? "rgba(0,0,0,.4)" : "#ccc",
+                  // backgroundColor:isDark?Colors.dark.darkSecondary:Colors.light.lightSecondary,
                   width: 33,
                   height: 33,
                   borderRadius: 14,
@@ -139,10 +146,53 @@ function BottomTabs() {
                   bottom: -5,
                 }}
               >
-                <Ionicons name="call" size={20} color={"#030303"} />
+                <Ionicons
+                  name="call-outline"
+                  size={20}
+                  color={
+                    "white"
+                    // isDark?Colors.dark.darkText:Colors.light.lightText
+                  }
+                />
               </View>
             ) : (
               <Ionicons name="call-outline" size={24} color={"gray"} />
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name={navigationString.settingTab}
+        component={ScreenIndex.SettingStack}
+        options={{
+          tabBarIcon: ({ color, focused }) => {
+            return focused ? (
+              <View
+                style={{
+                  position: "absolute",
+                  right: 0,
+                  backgroundColor: !isDark ? "rgba(0,0,0,.4)" : "#ccc",
+                  // backgroundColor:isDark?Colors.dark.darkSecondary:Colors.light.lightSecondary,
+                  width: 33,
+                  height: 33,
+                  borderRadius: 14,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  padding: 5,
+                  bottom: -5,
+                }}
+              >
+                <Ionicons
+                  name="settings-outline"
+                  size={20}
+                  color={
+                    "white"
+                    // isDark?Colors.dark.darkText:Colors.light.lightText
+                  }
+                />
+              </View>
+            ) : (
+              <Ionicons name="settings-outline" size={24} color={"gray"} />
             );
           },
         }}
